@@ -1,0 +1,63 @@
+.map-container {
+width: 90vw;
+height: 70vh;
+position: relative;
+}
+
+.map-div{
+  margin-top: 2vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.map-container{
+    margin-top: 1vh;
+    border: 2px solid #2eb875;
+    border-radius: 15px;
+}
+
+.marker {
+  background: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.address-fields{
+  width: 90vw;
+  height: 40px;
+  background: white;
+  text-align: center;
+}
+
+.buttons{
+  width: 90vw;
+  text-align: center;
+}
+
+.arrow{
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 40px;
+}
+
+.text{
+  line-height: 40px;
+  width: 40%;
+  height: 40px;
+  display: inline-block;
+  border-radius: 15px;
+}
+
+
+.switch-buttons{
+  margin-top: 10px;
+  width: 90vw;
+  text-align: center;
+}
+
+.mat-light{
+  background: white;
+  color: black;
+}

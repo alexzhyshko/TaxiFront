@@ -1,1 +1,28 @@
-<h1>{{user==null}}</h1>
+<div class="map-div">
+  <div class="address-fields" *ngIf="order===undefined">
+    <span class="text bg-green text-light">{{addresses.departureAddress!=null?addresses.departureAddress:"Choose departure point on map"}}</span>
+    <span class="arrow text-grey"><i class="fas fa-arrow-right"></i></span>
+    <span class="text bg-green text-light">{{addresses.destinationAddress!=null?addresses.destinationAddress:"Choose destination point on map"}}</span>
+    <input type="button" class="btn btn-sm border-success text-success mt-1 ml-1" name="Clear" value="Order" (click)="orderRegular()">
+  </div>
+  <div class="switch-buttons" *ngIf="order===undefined">
+    <mat-button-toggle-group color="light" name="fontStyle" aria-label="Car category">
+      <mat-button-toggle color="light" value="REGULAR" (click)="setCategory('REGULAR')">Regular</mat-button-toggle>
+      <mat-button-toggle color="light" value="LUX" (click)="setCategory('LUX')">Lux</mat-button-toggle>
+      <mat-button-toggle color="light" value="ISOLATED" (click)="setCategory('ISOLATED')">Isolated</mat-button-toggle>
+    </mat-button-toggle-group>
+    Max passenger count:
+    <mat-button-toggle-group color="light" name="fontStyle" aria-label="Max passenger count">
+      <mat-button-toggle color="light" value="4" (click)="setPassengerCount(4)">4</mat-button-toggle>
+      <mat-button-toggle color="light" value="9" (click)="setPassengerCount(9)">9</mat-button-toggle>
+      <mat-button-toggle color="light" value="12" (click)="setPassengerCount(12)">12</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div id="map" class="map-container"> </div>
+  <div class="buttons" *ngIf="order===undefined">
+    <input type="button" class="btn border-info text-info mt-1" name="Clear" value="Clear map" (click)="clearMap()">
+  </div>
+</div>
+<div class="order-div" *ngIf="order!==undefined">
+  
+</div>

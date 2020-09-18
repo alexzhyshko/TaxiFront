@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { NgxWebstorageModule } from "ngx-webstorage";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from "ngx-toastr";
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +15,9 @@ import { HeaderComponent } from './component/header/header/header.component';
 import { UserComponent } from './component/user/user.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { OrderComponent } from './component/order/order.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TokenInterceptor } from './token.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -28,9 +34,17 @@ import { OrderComponent } from './component/order/order.component';
     AppRoutingModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    MatButtonToggleModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

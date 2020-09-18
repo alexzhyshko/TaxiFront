@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
 
 *{
   font-family: 'Montserrat', sans-serif;
@@ -7,3 +9,22 @@
 html, body {
   height: 100%;
 }
+
+.bg-green{
+  background: #2eb875;
+}
+
+.border-green{
+  border-color: #2eb875;
+}
+
+.text-green{
+  color: #2eb875;
+}
+
+.text-grey{
+  color: #7c7c7c;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
