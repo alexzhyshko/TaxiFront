@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../storage/storage.service';
 import { UserDTO } from "../../dto/UserDTO";
+import { OrderDTO } from "../../dto/OrderDTO";
 import { Observable } from 'rxjs';
 
 
@@ -24,6 +25,10 @@ export class UserService {
 
   getCurrentUserByUsername(): Observable<UserDTO> {
     return this.httpClient.get<UserDTO>(this.baseUrl + '/user/getByUsername?username=' + this.storage.getUsername());
+  }
+
+  setUserId(userid: string){
+    this.storage.setId(userid);
   }
 
   order(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, category: string, places:number, anyCategory: boolean, anyCountOfCars: boolean): Observable<OrderDTO> {

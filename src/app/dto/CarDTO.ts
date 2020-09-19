@@ -1,3 +1,5 @@
+import { CoordinatesDTO } from "./CoordinatesDTO";
+
 export interface CarDTO{
   id: number;
   manufacturer: string;

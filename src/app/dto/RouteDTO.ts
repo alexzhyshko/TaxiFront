@@ -1,3 +1,5 @@
+import { CoordinatesDTO } from "./CoordinatesDTO";
+
 export interface RouteDTO{
   departure: CoordinatesDTO;
   destination: CoordinatesDTO;

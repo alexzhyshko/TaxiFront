@@ -1,19 +1,19 @@
 .map-container {
-width: 90vw;
-height: 70vh;
-position: relative;
+  width: 90vw;
+  height: 70vh;
+  position: relative;
 }
 
-.map-div{
+.map-div {
   margin-top: 2vh;
   margin-left: 5vw;
   margin-right: 5vw;
 }
 
-.map-container{
-    margin-top: 1vh;
-    border: 2px solid #2eb875;
-    border-radius: 15px;
+.map-container {
+  margin-top: 1vh;
+  border: 2px solid #2eb875;
+  border-radius: 15px;
 }
 
 .marker {
@@ -24,25 +24,25 @@ position: relative;
   cursor: pointer;
 }
 
-.address-fields{
+.address-fields {
   width: 90vw;
   height: 40px;
   background: white;
   text-align: center;
 }
 
-.buttons{
+.buttons {
   width: 90vw;
   text-align: center;
 }
 
-.arrow{
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 40px;
+.arrow {
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 40px;
 }
 
-.text{
+.text {
   line-height: 40px;
   width: 40%;
   height: 40px;
@@ -50,14 +50,23 @@ position: relative;
   border-radius: 15px;
 }
 
-
-.switch-buttons{
+.switch-buttons {
   margin-top: 10px;
   width: 90vw;
   text-align: center;
 }
 
-.mat-light{
+.mat-light {
   background: white;
   color: black;
+}
+
+.car-marker {
+  background: red;
+  width: 40px;
+  height: 40px;
+  display: block;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }

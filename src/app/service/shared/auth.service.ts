@@ -26,6 +26,7 @@ export class AuthService {
   login(loginRequest: LoginRequest): Observable<boolean> {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/Taxi/login',
       loginRequest).pipe(map(data => {
+        this.localStorage.setUsername(data.username);
         this.localStorage.setToken(data.token);
         this.localStorage.setRefreshToken(data.refreshToken);
         return true;

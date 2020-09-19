@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../service/user/user.service";
+import { OrderService } from "../../service/order/order.service";
 import { UserDTO } from "../../dto/UserDTO";
 import { OrderDTO } from "../../dto/OrderDTO";
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from "../../../environments/environment";
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { ToastrService } from "ngx-toastr";
+
 
 
 @Component({
@@ -15,7 +17,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class UserComponent implements OnInit {
 
-  order: OrderDTO;
+  orders: Array<OrderDTO>;
   orderCategory: string;
   orderPassengerCount: number;
   addresses;
@@ -24,16 +26,19 @@ export class UserComponent implements OnInit {
   lat = 50.449558;
   lng = 30.525236;
   zoom = 12;
+  carMarkers = [];
   markers = [];
   user: UserDTO;
   userService: UserService;
-  constructor(userService: UserService, private toastr: ToastrService) {
-    this.addresses={
+  orderService: OrderService;
+  constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService) {
+    this.addresses = {
       departureAddress: null,
       destinationAddress: null
     };
     mapboxgl.accessToken = environment.mapbox.accessToken;
     this.userService = userService;
+    this.orderService = orderService;
   }
 
   buildMap() {
@@ -73,11 +78,38 @@ export class UserComponent implements OnInit {
     });
   }
 
+  addCarMarker(lngLat) {
+    // var el = document.createElement('div');
+    // el.className = 'car-marker';
+    var el = document.createElement('div');
+    el.className = 'marker';
+    el.style.backgroundImage =
+      'url(https://placekitten.com/g/' +
+      marker.properties.iconSize.join('/') +
+      '/)';
+    el.style.width = marker.properties.iconSize[0] + 'px';
+    el.style.height = marker.properties.iconSize[1] + 'px';
+
+    var marker = new mapboxgl.Marker(el).setLngLat(lngLat).addTo(this.map);
+    this.carMarkers.push(marker);
+  }
+
   ngOnInit(): void {
     this.buildMap();
     this.userService.getCurrentUserByUsername().subscribe(data => {
-      console.log("adadadad");
       this.user = data;
+      this.userService.setUserId(this.user.id);
+      this.orderService.getActiveOrdersByUserId().subscribe(data => {
+        this.orders = data;
+        for (let order of this.orders) {
+          var coords = order.car.coordinates;
+          var lngLat = {
+            lng: coords.longitude,
+            lat: coords.latitude
+          };
+          this.addCarMarker(lngLat);
+        }
+      });
     });;
   }
 
@@ -86,41 +118,41 @@ export class UserComponent implements OnInit {
       marker.remove();
     }
     this.markers = [];
-    this.addresses={
+    this.addresses = {
       departureAddress: null,
       destinationAddress: null
     };
   }
 
-  getAddress(lat, lng, container, setDepartureAddress){
+  getAddress(lat, lng, container, setDepartureAddress) {
     var url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + lng + "," + lat + ".json?access_token=" + mapboxgl.accessToken;
-    $.get(url, function(data){
-        if(setDepartureAddress){
-          container.departureAddress = data.features[0].place_name;
-        }else{
-          container.destinationAddress = data.features[0].place_name;
-        }
+    $.get(url, function(data) {
+      if (setDepartureAddress) {
+        container.departureAddress = data.features[0].place_name;
+      } else {
+        container.destinationAddress = data.features[0].place_name;
+      }
     });
   }
 
-  setCategory(category: string){
+  setCategory(category: string) {
     this.orderCategory = category;
   }
 
-  setPassengerCount(count: number){
+  setPassengerCount(count: number) {
     this.orderPassengerCount = count;
   }
 
-  orderRegular(){
-    if(this.orderCategory===undefined){
+  orderRegular() {
+    if (this.orderCategory === undefined) {
       this.toastr.info("Please specify car category");
       return;
     }
-    else if(this.orderPassengerCount===undefined){
+    else if (this.orderPassengerCount === undefined) {
       this.toastr.info("Please specify passenger count");
       return;
     }
-    else if(this.markers.length<2){
+    else if (this.markers.length < 2) {
       this.toastr.info("Please specify departure and destination points");
       return;
     }
@@ -130,10 +162,10 @@ export class UserComponent implements OnInit {
     var destinationLat = this.markers[1]._lngLat.lat;
     var category = this.orderCategory;
     var places = this.orderPassengerCount;
-    this.userService.order(departureLng, departureLat, destinationLng, destinationLat, category, places, false, false).subscribe((data)=>{
+    this.userService.order(departureLng, departureLat, destinationLng, destinationLat, category, places, false, false).subscribe((data) => {
       console.log(data);
-      this.order = data;
-    }, (err)=>{
+      this.orders.push(data);
+    }, (err) => {
       this.toastr.error(err.error.text);
     });
   }
