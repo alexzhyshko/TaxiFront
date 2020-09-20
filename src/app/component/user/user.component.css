@@ -1,72 +1,158 @@
-.map-container {
-  width: 90vw;
-  height: 70vh;
-  position: relative;
-}
-
-.map-div {
-  margin-top: 2vh;
-  margin-left: 5vw;
-  margin-right: 5vw;
-}
-
-.map-container {
-  margin-top: 1vh;
+.map-container{
+  width: 60vw;
+  height: 90vh;
   border: 2px solid #2eb875;
-  border-radius: 15px;
-}
-
-.marker {
-  background: red;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.address-fields {
-  width: 90vw;
-  height: 40px;
-  background: white;
-  text-align: center;
-}
-
-.buttons {
-  width: 90vw;
-  text-align: center;
-}
-
-.arrow {
-  padding-left: 10px;
-  padding-right: 10px;
-  line-height: 40px;
-}
-
-.text {
-  line-height: 40px;
-  width: 40%;
-  height: 40px;
-  display: inline-block;
-  border-radius: 15px;
-}
-
-.switch-buttons {
   margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 15px;
+}
+
+.order-info{
+  margin-top: 100px;
+  margin-left: 40px;
+}
+
+.container {
+  overflow: hidden;
   width: 90vw;
+}
+
+.inner {
+  overflow: hidden;
+  width: 2000px;
+}
+
+.child {
+  float: left;
+}
+
+h4{
+  margin-bottom: 0px;
+}
+
+.text{
+  background: #2eb875;
+  border-radius: 5px;
+  width: 30vw;
+  height: 40px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  line-height: 40px;
+  padding-left: 6px;
+  padding-right: 6px;
+  color: white;
+}
+
+.bg-green{
+  background: #2eb875;
+}
+
+.btn{
+  background: #2eb875;
+  transition: .25s all;
+  margin-right: 5px;
+}
+
+.btn:hover{
+  background: #35c981;
+  transition: .25s all;
+}
+
+.btn:active{
+  background: #35c981;
+  transition: .25s all;
+}
+
+.img{
+  width: 30vw;
+  height: 200px;
+  text-align: center;
+  justify-content: center;
+  line-height: 200px;
+  color: #2eb875;
+}
+
+img{
+  width: 30vw;
+}
+
+.options{
+  overflow: hidden;
+}
+
+.option{
+  overflow: hidden;
+  width: 30vw;
+  height: 70px;
+  background: #2eb875;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #7c7c7c;
+  line-height: 70px;
+  padding-left: 15px;
+  font-size: 2em;
+  transition: .25s all;
+  cursor: pointer;
+}
+
+.option:hover{
+  background: #35c981;
+  transition: .25s all;
+}
+
+.option-category{
+  float: left;
+  color: white;
+  width: 180px;
+}
+
+.option-arrival-time{
+  float: left;
+  color: white;
+  width: 180px;
+  border-left: 2px solid white;
   text-align: center;
 }
 
-.mat-light {
-  background: white;
-  color: black;
+.option-price{
+  float: left;
+  color: white;
+  width: 180px;
+  text-align: center;
+  border-left: 2px solid white;
 }
 
-.car-marker {
-  background: red;
-  width: 40px;
-  height: 40px;
-  display: block;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+.option-legend{
+  overflow: hidden;
+  width: 30vw;
+  height: 30px;
+  background: #2eb875;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #7c7c7c;
+  line-height: 30px;
+  padding-left: 15px;
+  font-size: 1.5em;
+  color: white;
+}
+
+.option-legend-category{
+  float: left;
+  color: white;
+  width: 180px;
+  text-align: center;
+}
+
+.option-legend-arrival-time{
+  float: left;
+  color: white;
+  width: 180px;
+  border-left: 2px solid white;
+  text-align: center;
+}
+
+.option-legend-price{
+  float: left;
+  color: white;
+  width: 180px;
+  text-align: center;
+  border-left: 2px solid white;
 }

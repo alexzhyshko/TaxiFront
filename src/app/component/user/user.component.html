@@ -1,28 +1,43 @@
-<div class="map-div">
-  <div class="address-fields" *ngIf="orders.length==0">
-    <span class="text bg-green text-light">{{addresses.departureAddress!=null?addresses.departureAddress:"Choose departure point on map"}}</span>
-    <span class="arrow text-grey"><i class="fas fa-arrow-right"></i></span>
-    <span class="text bg-green text-light">{{addresses.destinationAddress!=null?addresses.destinationAddress:"Choose destination point on map"}}</span>
-    <input type="button" class="btn btn-sm border-success text-success mt-1 ml-1" name="Clear" value="Order" (click)="orderRegular()">
+<div id="container">
+  <div id="inner">
+    <div id="map" class="child map-container"> </div>
+    <div class="child order-info">
+      <h4>Departure:</h4>
+      <div class="text">{{addresses.departureAddress!==null?addresses.departureAddress:"Pick a point on map"}}</div>
+      <h4>Destination:</h4>
+      <div class="text">{{addresses.destinationAddress!==null?addresses.destinationAddress:"Pick a point on map"}}</div>
+      <h4>Pick passenger count:</h4>
+      <div class="switch-buttons">
+        <span class="btn btn-sm text-light switch-btn" (click)="setPassengerCount(4)">4</span>
+        <span class="btn btn-sm text-light switch-btn" (click)="setPassengerCount(8)">8</span>
+        <span class="btn btn-sm text-light switch-btn" (click)="setPassengerCount(12)">12</span>
+      </div>
+      <div class="img">
+        <h1 class="img" *ngIf="imgname===undefined">Pick passenger count</h1>
+        <img src="{{imgname}}" alt=""/>
+      </div>
+      <div class="options">
+        <div class="option-legend">
+          <div class="option-legend-category">Category</div>
+          <div class="option-legend-arrival-time">Arrival time</div>
+          <div class="option-legend-price">Price</div>
+        </div>
+        <div class="option">
+          <div class="option-category">Regular</div>
+          <div class="option-arrival-time">{{regularOrder!==undefined?regularOrder.arrivalTime+'min':"~~~"}}</div>
+          <div class="option-price">{{regularOrder!==undefined?regularOrder.price+'UAH':"~~~"}}</div>
+        </div>
+        <div class="option">
+          <div class="option-category">Isolated</div>
+          <div class="option-arrival-time">{{isolatedOrder!==undefined?isolatedOrder.arrivalTime+'min':"~~~"}}</div>
+          <div class="option-price">{{isolatedOrder!==undefined?isolatedOrder.price+'UAH':"~~~"}}</div>
+        </div>
+        <div class="option">
+          <div class="option-category">Lux</div>
+          <div class="option-arrival-time">{{luxOrder!==undefined?luxOrder.arrivalTime+'min':"~~~"}}</div>
+          <div class="option-price">{{luxOrder!==undefined?luxOrder.price+'UAH':"~~~"}}</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="switch-buttons" *ngIf="orders.length==0">
-    <mat-button-toggle-group color="light" name="fontStyle" aria-label="Car category">
-      <mat-button-toggle color="light" value="REGULAR" (click)="setCategory('REGULAR')">Regular</mat-button-toggle>
-      <mat-button-toggle color="light" value="LUX" (click)="setCategory('LUX')">Lux</mat-button-toggle>
-      <mat-button-toggle color="light" value="ISOLATED" (click)="setCategory('ISOLATED')">Isolated</mat-button-toggle>
-    </mat-button-toggle-group>
-    Max passenger count:
-    <mat-button-toggle-group color="light" name="fontStyle" aria-label="Max passenger count">
-      <mat-button-toggle color="light" value="4" (click)="setPassengerCount(4)">4</mat-button-toggle>
-      <mat-button-toggle color="light" value="9" (click)="setPassengerCount(9)">9</mat-button-toggle>
-      <mat-button-toggle color="light" value="12" (click)="setPassengerCount(12)">12</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-  <div id="map" class="map-container"> </div>
-  <div class="buttons" *ngIf="orders.length==0">
-    <input type="button" class="btn border-info text-info mt-1" name="Clear" value="Clear map" (click)="clearMap()">
-  </div>
-</div>
-<div class="order-div" *ngIf="orders.length>0">
-<div class="car-marker"></div>
 </div>

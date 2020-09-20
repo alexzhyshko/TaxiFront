@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
 
 
 
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -17,7 +18,11 @@ import { ToastrService } from "ngx-toastr";
 })
 export class UserComponent implements OnInit {
 
-  orders: Array<OrderDTO>;
+  regularOrder;
+  isolatedOrder;
+  luxOrder;
+  imgname: string;
+  orders = [];
   orderCategory: string;
   orderPassengerCount: number;
   addresses;
@@ -71,10 +76,9 @@ export class UserComponent implements OnInit {
       if (this.markers.length == 1) {
         this.getAddress(lngLat.lat, lngLat.lng, this.addresses, false);
       }
-
-
       var marker = new mapboxgl.Marker().setLngLat(lngLat).addTo(this.map);
       this.markers.push(marker);
+      this.loadDetails();
     });
   }
 
@@ -141,6 +145,39 @@ export class UserComponent implements OnInit {
 
   setPassengerCount(count: number) {
     this.orderPassengerCount = count;
+    this.imgname='assets/'+count+".png";
+    this.loadDetails();
+  }
+
+  loadDetails(){
+    if(this.orderPassengerCount!==undefined && this.markers.length==2){
+      var departureLng = this.markers[0]._lngLat.lng;
+      var departureLat = this.markers[0]._lngLat.lat;
+      var destinationLng = this.markers[1]._lngLat.lng;
+      var destinationLat = this.markers[1]._lngLat.lat;
+      var places = this.orderPassengerCount;
+      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "REGULAR", places).subscribe((data)=>{
+        this.regularOrder = data;
+      }, err=>{
+        if(err.status===405){
+            this.toastr.error("No car found for Regular category and "+places+" places");
+        }
+      });
+      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "ISOLATED", places).subscribe((data)=>{
+        this.isolatedOrder = data;
+      }, err=>{
+        if(err.status===405){
+            this.toastr.error("No car found for Isolated category and "+places+" places");
+        }
+      });
+      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "LUX",places).subscribe((data)=>{
+        this.luxOrder = data;
+      }, err=>{
+        if(err.status===405){
+            this.toastr.error("No car found for Lux category and "+places+" places");
+        }
+      });
+    }
   }
 
   orderRegular() {
