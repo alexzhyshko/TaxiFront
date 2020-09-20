@@ -6,8 +6,14 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+
+
 html, body {
   height: 100%;
+}
+
+body{
+  background-image: url(assets/bg2.png);
 }
 
 .bg-green{
