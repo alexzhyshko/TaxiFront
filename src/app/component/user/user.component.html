@@ -8,9 +8,9 @@
       <div class="text">{{addresses.destinationAddress!==null?addresses.destinationAddress:"Pick a point on map"}}</div>
       <h4>Pick passenger count:</h4>
       <div class="switch-buttons">
-        <span class="btn btn-sm text-light switch-btn" (click)="setPassengerCount(4)">4</span>
-        <span class="btn btn-sm text-light switch-btn" (click)="setPassengerCount(8)">8</span>
-        <span class="btn btn-sm text-light switch-btn" (click)="setPassengerCount(12)">12</span>
+        <span [ngClass]="orderPassengerCount!==4 ? 'btn btn-sm bg-green text-light switch-btn' : 'btn btn-sm bg-black text-light switch-btn'" (click)="setPassengerCount(4)">4</span>
+        <span [ngClass]="orderPassengerCount!==8 ? 'btn btn-sm bg-green text-light switch-btn' : 'btn btn-sm bg-black text-light switch-btn'" (click)="setPassengerCount(8)">8</span>
+        <span [ngClass]="orderPassengerCount!==12 ? 'btn btn-sm bg-green text-light switch-btn' : 'btn btn-sm bg-black text-light switch-btn'" (click)="setPassengerCount(12)">12</span>
       </div>
       <div class="img">
         <h1 class="img" *ngIf="imgname===undefined">Pick passenger count</h1>
@@ -22,22 +22,23 @@
           <div class="option-legend-arrival-time">Arrival time</div>
           <div class="option-legend-price">Price</div>
         </div>
-        <div class="option">
+        <div class="option" (click)="orderRegular('REGULAR')">
           <div class="option-category">Regular</div>
           <div class="option-arrival-time">{{regularOrder!==undefined?regularOrder.arrivalTime+'min':"~~~"}}</div>
           <div class="option-price">{{regularOrder!==undefined?regularOrder.price+'UAH':"~~~"}}</div>
         </div>
-        <div class="option">
+        <div class="option" (click)="orderRegular('ISOLATED')">
           <div class="option-category">Isolated</div>
           <div class="option-arrival-time">{{isolatedOrder!==undefined?isolatedOrder.arrivalTime+'min':"~~~"}}</div>
           <div class="option-price">{{isolatedOrder!==undefined?isolatedOrder.price+'UAH':"~~~"}}</div>
         </div>
-        <div class="option">
+        <div class="option" (click)="orderRegular('LUX')">
           <div class="option-category">Lux</div>
           <div class="option-arrival-time">{{luxOrder!==undefined?luxOrder.arrivalTime+'min':"~~~"}}</div>
           <div class="option-price">{{luxOrder!==undefined?luxOrder.price+'UAH':"~~~"}}</div>
         </div>
       </div>
+      <button class="btn btn-sm btn-info" type="button" name="button" (click)="clearMap()">Clear waypoints</button>
     </div>
   </div>
 </div>

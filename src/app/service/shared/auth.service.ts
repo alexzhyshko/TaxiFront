@@ -34,12 +34,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    const refreshToken = {
-      refreshToken: this.localStorage.getRefreshToken(),
-      username: this.localStorage.getUsername()
-    }
-    return this.httpClient.post<RefreshTokenResponse>('http://localhost:8080/Taxi/refresh/token',
-      refreshToken)
+    return this.httpClient.get<RefreshTokenResponse>('http://localhost:8080/Taxi/refreshToken?refreshToken='+this.localStorage.getRefreshToken())
       .pipe(tap(response => {
         this.localStorage.setToken(response.token);
         this.localStorage.setRefreshToken(response.refreshToken);

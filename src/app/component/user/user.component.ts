@@ -7,7 +7,7 @@ import * as mapboxgl from 'mapbox-gl';
 import { environment } from "../../../environments/environment";
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { ToastrService } from "ngx-toastr";
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -22,7 +22,6 @@ export class UserComponent implements OnInit {
   isolatedOrder;
   luxOrder;
   imgname: string;
-  orders = [];
   orderCategory: string;
   orderPassengerCount: number;
   addresses;
@@ -36,7 +35,7 @@ export class UserComponent implements OnInit {
   user: UserDTO;
   userService: UserService;
   orderService: OrderService;
-  constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService) {
+  constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService, private router: Router) {
     this.addresses = {
       departureAddress: null,
       destinationAddress: null
@@ -103,18 +102,18 @@ export class UserComponent implements OnInit {
     this.userService.getCurrentUserByUsername().subscribe(data => {
       this.user = data;
       this.userService.setUserId(this.user.id);
-      this.orderService.getActiveOrdersByUserId().subscribe(data => {
-        this.orders = data;
-        for (let order of this.orders) {
-          var coords = order.car.coordinates;
-          var lngLat = {
-            lng: coords.longitude,
-            lat: coords.latitude
-          };
-          this.addCarMarker(lngLat);
-        }
-      });
-    });;
+      // this.orderService.getActiveOrdersByUserId().subscribe(data => {
+      //   this.orders = data;
+      //   for (let order of this.orders) {
+      //     var coords = order.car.coordinates;
+      //     var lngLat = {
+      //       lng: coords.longitude,
+      //       lat: coords.latitude
+      //     };
+      //     this.addCarMarker(lngLat);
+      //   }
+      // });
+    });
   }
 
   clearMap() {
@@ -126,6 +125,10 @@ export class UserComponent implements OnInit {
       departureAddress: null,
       destinationAddress: null
     };
+    this.regularOrder = undefined;
+    this.isolatedOrder = undefined;
+    this.luxOrder = undefined;
+    this.orderPassengerCount = undefined;
   }
 
   getAddress(lat, lng, container, setDepartureAddress) {
@@ -156,36 +159,36 @@ export class UserComponent implements OnInit {
       var destinationLng = this.markers[1]._lngLat.lng;
       var destinationLat = this.markers[1]._lngLat.lat;
       var places = this.orderPassengerCount;
+      this.toastr.info("Loading");
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "REGULAR", places).subscribe((data)=>{
         this.regularOrder = data;
       }, err=>{
-        if(err.status===405){
+        if(err.status===404){
             this.toastr.error("No car found for Regular category and "+places+" places");
+            this.regularOrder = undefined;
         }
       });
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "ISOLATED", places).subscribe((data)=>{
         this.isolatedOrder = data;
       }, err=>{
-        if(err.status===405){
+        if(err.status===404){
             this.toastr.error("No car found for Isolated category and "+places+" places");
+            this.isolatedOrder = undefined;
         }
       });
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "LUX",places).subscribe((data)=>{
         this.luxOrder = data;
       }, err=>{
-        if(err.status===405){
+        if(err.status===404){
             this.toastr.error("No car found for Lux category and "+places+" places");
+            this.luxOrder = undefined;
         }
       });
     }
   }
 
-  orderRegular() {
-    if (this.orderCategory === undefined) {
-      this.toastr.info("Please specify car category");
-      return;
-    }
-    else if (this.orderPassengerCount === undefined) {
+  orderRegular(category: string) {
+    if (this.orderPassengerCount === undefined) {
       this.toastr.info("Please specify passenger count");
       return;
     }
@@ -197,11 +200,10 @@ export class UserComponent implements OnInit {
     var departureLat = this.markers[0]._lngLat.lat;
     var destinationLng = this.markers[1]._lngLat.lng;
     var destinationLat = this.markers[1]._lngLat.lat;
-    var category = this.orderCategory;
     var places = this.orderPassengerCount;
     this.userService.order(departureLng, departureLat, destinationLng, destinationLat, category, places, false, false).subscribe((data) => {
       console.log(data);
-      this.orders.push(data);
+      this.router.navigateByUrl("orders");
     }, (err) => {
       this.toastr.error(err.error.text);
     });

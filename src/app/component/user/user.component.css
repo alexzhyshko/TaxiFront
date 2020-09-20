@@ -47,8 +47,12 @@ h4{
   background: #2eb875;
 }
 
+.bg-black{
+  background: black;
+  color: white;
+}
+
 .btn{
-  background: #2eb875;
   transition: .25s all;
   margin-right: 5px;
 }
