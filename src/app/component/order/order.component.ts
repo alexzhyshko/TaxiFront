@@ -22,7 +22,9 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orderService.getActiveOrdersByUserId().subscribe(data=>{
+    this.orderService.getAllOrdersByUserId().subscribe(data=>{
+      console.log(data);
+
       this.orders = data;
     });
   }

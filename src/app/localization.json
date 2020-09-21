@@ -1,0 +1,27 @@
+{
+"departure": {
+  "RU": "Точка отправления",
+  "UA": "Точка відправлення",
+  "EN": "Departure"
+},
+"destination":{
+  "RU": "Точка назначения",
+  "UA": "Точка призначення",
+  "EN": "Destination"
+},
+"passengerCount":{
+  "RU": "Выберите количество пассажиров",
+  "UA": "Оберіть кількість пасажирів",
+  "EN": "Pick passenger count"
+},
+"clear":{
+  "RU": "Очистить точки",
+  "UA": "Очистити точки",
+  "EN": "Clear waypoints"
+},
+"pickPoint":{
+  "RU": "Выберите точку на карте",
+  "UA": "Оберіть точку на карті",
+  "EN": "Pick a point on the map"
+}
+}

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../storage/storage.service';
 import { UserDTO } from "../../dto/UserDTO";
 import { OrderDTO } from "../../dto/OrderDTO";
+import { CarDTO } from "../../dto/CarDTO";
 import { Observable } from 'rxjs';
 
 
@@ -17,6 +18,10 @@ export class UserService {
 
   constructor(private storage: StorageService, private httpClient: HttpClient) {
 
+  }
+
+  getAllCars(): Observable<Array<CarDTO>> {
+    return this.httpClient.get<Array<CarDTO>>(this.baseUrl + '/car/getAll');
   }
 
   getCurrentUserById(): Observable<UserDTO> {

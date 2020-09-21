@@ -160,3 +160,9 @@ img{
   text-align: center;
   border-left: 2px solid white;
 }
+
+.car-marker{
+  color: red;
+  background: red;
+  background-image: url();
+}

@@ -4,9 +4,16 @@
 }
 
 .card{
-  background: #2eb875;
   color: white;
   margin: 15px;
+}
+
+.bg-green{
+  background: #2eb875;
+}
+
+.bg-grey{
+  background: #7c7c7c
 }
 
 .card-text{

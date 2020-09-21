@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../service/user/user.service";
 import { OrderService } from "../../service/order/order.service";
+import { LocalizationService } from "../../localization/localization.service";
 import { UserDTO } from "../../dto/UserDTO";
 import { OrderDTO } from "../../dto/OrderDTO";
 import * as mapboxgl from 'mapbox-gl';
@@ -18,6 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
+  cars = [];
   variants = [];
   imgname: string;
   orderCategory: string;
@@ -33,7 +35,7 @@ export class UserComponent implements OnInit {
   user: UserDTO;
   userService: UserService;
   orderService: OrderService;
-  constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService, private router: Router) {
+  constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService, private router: Router, private localizationService: LocalizationService) {
     this.addresses = {
       departureAddress: null,
       destinationAddress: null
@@ -79,38 +81,27 @@ export class UserComponent implements OnInit {
     });
   }
 
-  addCarMarker(lngLat) {
-    // var el = document.createElement('div');
-    // el.className = 'car-marker';
-    var el = document.createElement('div');
-    el.className = 'marker';
-    el.style.backgroundImage =
-      'url(https://placekitten.com/g/' +
-      marker.properties.iconSize.join('/') +
-      '/)';
-    el.style.width = marker.properties.iconSize[0] + 'px';
-    el.style.height = marker.properties.iconSize[1] + 'px';
 
-    var marker = new mapboxgl.Marker(el).setLngLat(lngLat).addTo(this.map);
+  addCarMarker(lngLat) {
+    var marker = new mapboxgl.Marker({color: 'red'}).setLngLat(lngLat).addTo(this.map);
     this.carMarkers.push(marker);
   }
 
   ngOnInit(): void {
     this.buildMap();
+    this.userService.getAllCars().subscribe(data => {
+      this.cars = data;
+      for(let car of this.cars){
+        var lngLat = {
+          lng: car.coordinates.longitude,
+          lat: car.coordinates.latitude
+        };
+        this.addCarMarker(lngLat);
+      }
+    });
     this.userService.getCurrentUserByUsername().subscribe(data => {
       this.user = data;
       this.userService.setUserId(this.user.id);
-      // this.orderService.getActiveOrdersByUserId().subscribe(data => {
-      //   this.orders = data;
-      //   for (let order of this.orders) {
-      //     var coords = order.car.coordinates;
-      //     var lngLat = {
-      //       lng: coords.longitude,
-      //       lat: coords.latitude
-      //     };
-      //     this.addCarMarker(lngLat);
-      //   }
-      // });
     });
   }
 
@@ -144,19 +135,22 @@ export class UserComponent implements OnInit {
 
   setPassengerCount(count: number) {
     this.orderPassengerCount = count;
-    this.imgname='assets/'+count+".png";
+    this.imgname = 'assets/' + count + ".png";
     this.loadDetails();
   }
 
-  loadDetails(){
-    if(this.orderPassengerCount!==undefined && this.markers.length==2){
+  loadDetails() {
+    if (this.orderPassengerCount !== undefined && this.markers.length == 2) {
       var departureLng = this.markers[0]._lngLat.lng;
       var departureLat = this.markers[0]._lngLat.lat;
       var destinationLng = this.markers[1]._lngLat.lng;
       var destinationLat = this.markers[1]._lngLat.lat;
       var places = this.orderPassengerCount;
-      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data)=>{
-          this.variants = data;
+      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data) => {
+        console.log(data);
+        this.variants = data;
+
+
       });
     }
   }
@@ -176,10 +170,30 @@ export class UserComponent implements OnInit {
     var destinationLat = this.markers[1]._lngLat.lat;
     var places = this.orderPassengerCount;
     this.userService.order(departureLng, departureLat, destinationLng, destinationLat, category, places, false, false).subscribe((data) => {
-      console.log(data);
       this.router.navigateByUrl("orders");
     }, (err) => {
       this.toastr.error(err.error.text);
     });
   }
+
+  getLocalizedDestination(){
+    return this.localizationService.getLocalizedDestination();
+  }
+
+  getLocalizedDeparture(){
+    return this.localizationService.getLocalizedDeparture();
+  }
+
+  getLocalizedClear(){
+    return this.localizationService.getLocalizedClear();
+  }
+
+  getLocalizedPassengerCount(){
+    return this.localizationService.getLocalizedPassengerCount();
+  }
+
+  getLocalizedPickPoint(){
+    return this.localizationService.getLocalizedPickPoint();
+  }
+
 }

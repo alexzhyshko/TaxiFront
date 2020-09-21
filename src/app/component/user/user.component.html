@@ -2,12 +2,12 @@
   <div id="inner">
     <div id="map" class="child map-container"> </div>
     <div class="child order-info">
-      <h4>Departure:</h4>
-      <div class="text">{{addresses.departureAddress!==null?addresses.departureAddress:"Pick a point on map"}}</div>
-      <h4>Destination:</h4>
-      <div class="text">{{addresses.destinationAddress!==null?addresses.destinationAddress:"Pick a point on map"}}</div>
-      <button class="btn btn-sm btn-secondary" type="button" name="button" (click)="clearMap()">Clear waypoints</button>
-      <h4>Pick passenger count:</h4>
+      <h4>{{getLocalizedDeparture()}}:</h4>
+      <div class="text">{{addresses.departureAddress!==null?addresses.departureAddress:getLocalizedPickPoint()}}</div>
+      <h4>{{getLocalizedDestination()}}:</h4>
+      <div class="text">{{addresses.destinationAddress!==null?addresses.destinationAddress:getLocalizedPickPoint()}}</div>
+      <button class="btn btn-sm btn-secondary" type="button" name="button" (click)="clearMap()">{{getLocalizedClear()}}</button>
+      <h4>{{getLocalizedPassengerCount()}}:</h4>
       <div class="switch-buttons">
         <span [ngClass]="orderPassengerCount!==4 ? 'btn btn-sm bg-green text-light switch-btn' : 'btn btn-sm bg-black text-light switch-btn'" (click)="setPassengerCount(4)">4</span>
         <span [ngClass]="orderPassengerCount!==8 ? 'btn btn-sm bg-green text-light switch-btn' : 'btn btn-sm bg-black text-light switch-btn'" (click)="setPassengerCount(8)">8</span>

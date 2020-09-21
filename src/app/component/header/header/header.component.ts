@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
     if(locale==='EN'){
       return 'GB';
     }
-    console.log(locale);
     return locale;
   }
 

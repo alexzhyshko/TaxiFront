@@ -22,6 +22,11 @@ export class OrderService {
     return this.httpClient.get<Array<OrderDTO>>(this.baseUrl+"/order/get/active/byUserId/"+userid);
   }
 
+  getAllOrdersByUserId(): Observable<Array<OrderDTO>>{
+    var userid = this.storage.getUserId();
+    return this.httpClient.get<Array<OrderDTO>>(this.baseUrl+"/order/get/all/byUserId/"+userid);
+  }
+
   getOrderDetails(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, places:number): Observable<Array<RouteDetails>>{
     var payload = {
       departureLongitude: departureLng,

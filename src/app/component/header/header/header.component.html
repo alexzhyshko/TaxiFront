@@ -1,7 +1,10 @@
 <nav class="navbar navbar-dark bg-green justify-content-between">
   <a class="navbar-brand" routerLink="/">
-    <h1>Taxi</h1>
+    <span class="h3">Taxi</span>
+    <img width="60px" src="assets/logo.png" alt="">
+
   </a>
+<span class="ml-2" routerLink="orders" *ngIf="isLoggedIn">My orders</span>
 
   <div class="float-right" id="navbarText">
     <div *ngIf="!isLoggedIn" class="btn-group float-right" role="group">

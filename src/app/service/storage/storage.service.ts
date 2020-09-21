@@ -54,6 +54,8 @@ export class StorageService {
   }
 
   clear(){
+    var locale = this.getLocale();
     this.localStorage.clear();
+    this.setLocale(locale);
   }
 }
