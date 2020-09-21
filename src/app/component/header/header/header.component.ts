@@ -26,6 +26,19 @@ export class HeaderComponent implements OnInit {
     //});
   }
 
+  getLocale(){
+    var locale = this.userService.getLocale();
+    if(locale==='EN'){
+      return 'GB';
+    }
+    console.log(locale);
+    return locale;
+  }
+
+  setLocale(locale: string){
+    this.userService.setLocale(locale);
+    this.ngOnInit();
+  }
 
   ngOnInit(): void {
     this.updateUser();

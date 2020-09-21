@@ -18,9 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  regularOrder;
-  isolatedOrder;
-  luxOrder;
+  variants = [];
   imgname: string;
   orderCategory: string;
   orderPassengerCount: number;
@@ -125,9 +123,7 @@ export class UserComponent implements OnInit {
       departureAddress: null,
       destinationAddress: null
     };
-    this.regularOrder = undefined;
-    this.isolatedOrder = undefined;
-    this.luxOrder = undefined;
+    this.variants = [];
     this.orderPassengerCount = undefined;
   }
 
@@ -159,30 +155,8 @@ export class UserComponent implements OnInit {
       var destinationLng = this.markers[1]._lngLat.lng;
       var destinationLat = this.markers[1]._lngLat.lat;
       var places = this.orderPassengerCount;
-      this.toastr.info("Loading");
-      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "REGULAR", places).subscribe((data)=>{
-        this.regularOrder = data;
-      }, err=>{
-        if(err.status===404){
-            this.toastr.error("No car found for Regular category and "+places+" places");
-            this.regularOrder = undefined;
-        }
-      });
-      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "ISOLATED", places).subscribe((data)=>{
-        this.isolatedOrder = data;
-      }, err=>{
-        if(err.status===404){
-            this.toastr.error("No car found for Isolated category and "+places+" places");
-            this.isolatedOrder = undefined;
-        }
-      });
-      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, "LUX",places).subscribe((data)=>{
-        this.luxOrder = data;
-      }, err=>{
-        if(err.status===404){
-            this.toastr.error("No car found for Lux category and "+places+" places");
-            this.luxOrder = undefined;
-        }
+      this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data)=>{
+          this.variants = data;
       });
     }
   }

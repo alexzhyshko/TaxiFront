@@ -26,7 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler): Observable<HttpEvent<any>> {
     var newReq = req;
     if (this.storageService.getToken()) {
-      newReq = this.addToken(req, this.storageService.getToken(), "EN");
+      newReq = this.addToken(req, this.storageService.getToken(), this.storageService.getLocale());
     }
     return next.handle(newReq).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse
@@ -45,7 +45,7 @@ export class TokenInterceptor implements HttpInterceptor {
         switchMap((refreshTokenResponse: RefreshTokenResponse) => {
           this.isTokenRefreshing = false;
           this.refreshTokenSubject.next(refreshTokenResponse.token);
-          return next.handle(this.addToken(req, refreshTokenResponse.token, "EN"));
+          return next.handle(this.addToken(req, refreshTokenResponse.token, this.storageService.getLocale()));
         })
       )
     }
@@ -54,7 +54,8 @@ export class TokenInterceptor implements HttpInterceptor {
     const clonedRequest = req.clone({
       setHeaders: {
         User_Locale: locale,
-        Authorization: `Bearer ${jwtToken}`
+        Authorization: `Bearer ${jwtToken}`,
+        Charset: 'UTF-8'
       }
     });
     return clonedRequest;

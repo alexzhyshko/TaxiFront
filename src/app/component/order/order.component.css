@@ -1,0 +1,29 @@
+.card-deck{
+  width: 90vw;
+  margin-left: 5vw;
+}
+
+.card{
+  background: #2eb875;
+  color: white;
+  margin: 15px;
+}
+
+.card-text{
+  font-size: 1.3em;
+}
+
+.footer-text{
+  font-size: 0.9em;
+}
+
+.display{
+  padding-top: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.display-3{
+  color: #2eb875;
+}

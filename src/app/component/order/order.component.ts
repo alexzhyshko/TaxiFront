@@ -14,7 +14,7 @@ export class OrderComponent implements OnInit {
 
   userService: UserService;
   orderService: OrderService;
-  data=[];
+  orders=[];
 
   constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService, private router: Router) {
     this.userService = userService;
@@ -23,7 +23,13 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getActiveOrdersByUserId().subscribe(data=>{
-      this.data = data;
+      this.orders = data;
+    });
+  }
+
+  finishOrder(orderid: number){
+    this.orderService.finishOrder(orderid).subscribe(data=>{}, err=>{
+      this.ngOnInit();
     });
   }
 

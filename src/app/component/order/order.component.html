@@ -1,1 +1,18 @@
-<h1 *ngFor="let order of data">{{order.id}}</h1>
+<div class="display"  routerLink="/" *ngIf="orders.length==0">
+  <span class="display-3">Let's make your first order</span>
+</div>
+<div class="card-deck">
+  <div class="card" *ngFor="let order of orders">
+    <div class="card-body">
+      <p class="card-text">{{order.driver.name}} &bull; {{order.car.plate}} &bull; {{order.car.manufacturer}} {{order.car.model}}</p>
+      <p class="card-text">Driver arrives in {{order.timeToArrival}} minute(-s)</p>
+      <p class="card-text">{{order.price}}UAH</p>
+      <button class="btn btn-sm btn-info" type="button" name="button" *ngIf="order.statusid==1" (click)="finishOrder(order.id)">Finish order</button>
+    </div>
+    <div class="card-footer">
+      <small class="footer-text">{{order.dateOfOrder.date.day}}-{{order.dateOfOrder.date.month}}-{{order.dateOfOrder.date.year}} {{order.dateOfOrder.time.hour}}:{{order.dateOfOrder.time.minute}}</small>
+      <br>
+      <small class="footer-text">{{order.status}}</small>
+    </div>
+  </div>
+</div>

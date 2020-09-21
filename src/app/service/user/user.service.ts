@@ -31,6 +31,14 @@ export class UserService {
     this.storage.setId(userid);
   }
 
+  setLocale(locale: string){
+    this.storage.setLocale(locale);
+  }
+
+  getLocale(){
+    return this.storage.getLocale();
+  }
+
   order(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, category: string, places:number, anyCategory: boolean, anyCountOfCars: boolean): Observable<OrderDTO> {
     var payload = {
       departureLongitude: departureLng,

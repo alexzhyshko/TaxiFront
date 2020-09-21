@@ -25,6 +25,10 @@ export class StorageService {
     return this.localStorage.retrieve('refreshToken');
   }
 
+  getLocale(){
+    return this.localStorage.retrieve("locale");
+  }
+
   isLoggedIn(): boolean {
     return this.getToken() != null;
   }
@@ -43,6 +47,10 @@ export class StorageService {
 
   setRefreshToken(refreshToken: string) {
     this.localStorage.store("refreshToken", refreshToken);
+  }
+
+  setLocale(locale: string){
+    this.localStorage.store("locale", locale);
   }
 
   clear(){

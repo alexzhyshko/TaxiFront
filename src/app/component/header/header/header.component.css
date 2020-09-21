@@ -38,3 +38,21 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+.no-dropdown-sign::before {
+  display: none;
+}
+
+.dropdown-menu{
+  background: #2eb875;
+  border: 1px solid white;
+  min-width: 50px !important;
+  width: 50px;
+  padding: 0;
+}
+
+.dropdown-item{
+  padding: 0;
+  padding-left: 9px;
+  padding-right: 7px;
+}

@@ -22,16 +22,19 @@ export class OrderService {
     return this.httpClient.get<Array<OrderDTO>>(this.baseUrl+"/order/get/active/byUserId/"+userid);
   }
 
-  getOrderDetails(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, category:string, places:number): Observable<RouteDetails>{
+  getOrderDetails(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, places:number): Observable<Array<RouteDetails>>{
     var payload = {
       departureLongitude: departureLng,
       departureLatitude: departureLat,
       destinationLongitude: destinationLng,
       destinationLatitude: destinationLat,
-      numberOfPassengers: places,
-      carCategory: category
+      numberOfPassengers: places
     };
-    return this.httpClient.post<RouteDetails>(this.baseUrl+"/order/getRouteDetails", payload);
+    return this.httpClient.post<Array<RouteDetails>>(this.baseUrl+"/order/getRouteDetails", payload);
+  }
+
+  finishOrder(orderid: number){
+    return this.httpClient.get(this.baseUrl+"/order/finish?orderId="+orderid);
   }
 
 }
