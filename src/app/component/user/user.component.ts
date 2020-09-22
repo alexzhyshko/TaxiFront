@@ -55,7 +55,8 @@ export class UserComponent implements OnInit {
     this.map.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
+        mapboxgl: mapboxgl,
+        placeholder: this.getLocalizedGeocoderPlaceholder()
       })
     );
     this.map.on('click', (e) => {
@@ -194,6 +195,14 @@ export class UserComponent implements OnInit {
 
   getLocalizedPickPoint(){
     return this.localizationService.getLocalizedPickPoint();
+  }
+
+  getLocalizedMin(){
+    return this.localizationService.getLocalizedMin();
+  }
+
+  getLocalizedGeocoderPlaceholder(){
+    return this.localizationService.getLocalizedGeocoderPlaceholder();
   }
 
 }

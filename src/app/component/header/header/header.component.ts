@@ -3,6 +3,8 @@ import { AuthService } from "../../../service/shared/auth.service";
 import { Router } from "@angular/router";
 import { UserService } from "../../../service/user/user.service";
 import { UserDTO } from "../../../dto/UserDTO";
+import { LocalizationService } from "../../../localization/localization.service";
+
 
 @Component({
   selector: 'app-header',
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   user: UserDTO;
 
   constructor(private authService: AuthService, private router: Router,
-    private userService: UserService) {
+    private userService: UserService, private localizationService: LocalizationService) {
     //this.router.routeReuseStrategy.shouldReuseRoute = function() {
     //  return false;
     //};
@@ -59,6 +61,10 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     window.location.replace("/");
+  }
+
+  getLocalizedMyOrders(){
+    return this.localizationService.getLocalizedMyOrders();
   }
 
 }

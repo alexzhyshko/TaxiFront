@@ -19,8 +19,8 @@
       <div class="options">
         <div class="option" (click)="orderRegular(variant.categoryLocaleName.toUpperCase())" *ngFor="let variant of variants">
           <div class="option-category">{{variant.categoryLocaleName}}</div>
-          <div class="option-arrival-time">{{variant.arrivalTime+'min'}}</div>
-          <div class="option-price">{{variant.price+'UAH'}}</div>
+          <div class="option-arrival-time">{{variant.arrivalTime+getLocalizedMin()}}</div>
+          <div class="option-price">{{variant.price+'₴'}}</div>
         </div>
       </div>
     </div>

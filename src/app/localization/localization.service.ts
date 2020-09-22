@@ -43,6 +43,17 @@ export class LocalizationService {
     }
   }
 
+  getLocalizedMin(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.min.EN;
+    }else if(locale==="RU"){
+      return localization.min.RU;
+    }else if(locale==="UA"){
+      return localization.min.UA;
+    }
+  }
+
   getLocalizedPassengerCount(){
     var locale = this.localStorage.getLocale();
     if(locale==="EN"){
@@ -62,6 +73,28 @@ export class LocalizationService {
       return localization.pickPoint.RU;
     }else if(locale==="UA"){
       return localization.pickPoint.UA;
+    }
+  }
+
+  getLocalizedGeocoderPlaceholder(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.geocoderPlaceholer.EN;
+    }else if(locale==="RU"){
+      return localization.geocoderPlaceholer.RU;
+    }else if(locale==="UA"){
+      return localization.geocoderPlaceholer.UA;
+    }
+  }
+
+  getLocalizedMyOrders(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.myOrders.EN;
+    }else if(locale==="RU"){
+      return localization.myOrders.RU;
+    }else if(locale==="UA"){
+      return localization.myOrders.UA;
     }
   }
 

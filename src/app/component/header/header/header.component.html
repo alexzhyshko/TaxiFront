@@ -4,7 +4,7 @@
     <img width="60px" src="assets/logo.png" alt="">
 
   </a>
-<span class="ml-2" routerLink="orders" *ngIf="isLoggedIn">My orders</span>
+<span class="ml-2" routerLink="orders" *ngIf="isLoggedIn">{{getLocalizedMyOrders()}}</span>
 
   <div class="float-right" id="navbarText">
     <div *ngIf="!isLoggedIn" class="btn-group float-right" role="group">

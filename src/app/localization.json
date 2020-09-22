@@ -23,5 +23,20 @@
   "RU": "Выберите точку на карте",
   "UA": "Оберіть точку на карті",
   "EN": "Pick a point on the map"
+},
+"min":{
+  "RU": "мин.",
+  "UA": "хв.",
+  "EN": "min."
+},
+"geocoderPlaceholer":{
+  "RU": "Поиск",
+  "UA": "Пошук",
+  "EN": "Search"
+},
+"myOrders":{
+  "RU": "Мои заказы",
+  "UA": "Мої замовлення",
+  "EN": "My orders"
 }
 }
