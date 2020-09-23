@@ -2,9 +2,8 @@
   <a class="navbar-brand" routerLink="/">
     <span class="h3">Taxi</span>
     <img width="60px" src="assets/logo.png" alt="">
-
+    <span class="my-orders ml-4" routerLink="orders" *ngIf="isLoggedIn">{{getLocalizedMyOrders()}}</span>
   </a>
-<span class="ml-2" routerLink="orders" *ngIf="isLoggedIn">{{getLocalizedMyOrders()}}</span>
 
   <div class="float-right" id="navbarText">
     <div *ngIf="!isLoggedIn" class="btn-group float-right" role="group">
@@ -18,9 +17,9 @@
           <img width="30px;" class="mr-2" src="https://www.countryflags.io/{{getLocale()}}/flat/64.png">
         </button>
         <div class="dropdown-menu no-dropdown-sign" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#"><img width="30px;" class="mr-2" src="https://www.countryflags.io/ua/flat/64.png" (click)="setLocale('UA')"></a>
-          <a class="dropdown-item" href="#"><img width="30px;" class="mr-2" src="https://www.countryflags.io/ru/flat/64.png" (click)="setLocale('RU')"></a>
-          <a class="dropdown-item" href="#"><img width="30px;" class="mr-2" src="https://www.countryflags.io/gb/flat/64.png" (click)="setLocale('EN')"></a>
+          <a class="dropdown-item"><img width="30px;" class="mr-2" src="https://www.countryflags.io/ua/flat/64.png" (click)="setLocale('UA')"></a>
+          <a class="dropdown-item"><img width="30px;" class="mr-2" src="https://www.countryflags.io/ru/flat/64.png" (click)="setLocale('RU')"></a>
+          <a class="dropdown-item"><img width="30px;" class="mr-2" src="https://www.countryflags.io/gb/flat/64.png" (click)="setLocale('EN')"></a>
         </div>
         <a class="btn btn-sm bg-light text-center" (click)="logout()">Logout</a>
       </div>

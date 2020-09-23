@@ -3,7 +3,7 @@ import { UserService } from "../../service/user/user.service";
 import { OrderService } from "../../service/order/order.service";
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { LocalizationService } from "../../localization/localization.service";
 
 @Component({
   selector: 'app-order',
@@ -12,20 +12,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
 
+  pages = [];
   userService: UserService;
   orderService: OrderService;
   orders=[];
 
-  constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService, private router: Router) {
+  constructor(userService: UserService, orderService: OrderService, private toastr: ToastrService, private router: Router, private localizationService: LocalizationService) {
     this.userService = userService;
     this.orderService = orderService;
   }
 
   ngOnInit(): void {
+    if(this.userService.getActivePage()==null){
+      this.userService.setPage(0);
+    }
     this.orderService.getAllOrdersByUserId().subscribe(data=>{
-      console.log(data);
-
-      this.orders = data;
+      this.orders = data.orders;
+      this.pages = Array(data.numberOfPages).fill(1).map((x,i)=>i);
     });
   }
 
@@ -34,5 +37,28 @@ export class OrderComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  getLocalizedFinishOrder(){
+    return this.localizationService.getLocalizedFinishOrder();
+  }
+
+  getLocalizedDriverArrives(){
+    return this.localizationService.getLocalizedDriverArrives();
+  }
+
+  getLocalizedMinutes(){
+    return this.localizationService.getLocalizedMinutes();
+  }
+
+  setPage(page: number){
+    this.userService.setPage(page);
+    this.ngOnInit();
+  }
+
+  getActivePage(){
+    return this.userService.getActivePage();
+  }
+
+
 
 }

@@ -98,4 +98,39 @@ export class LocalizationService {
     }
   }
 
+  getLocalizedFinishOrder(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.finishOrder.EN;
+    }else if(locale==="RU"){
+      return localization.finishOrder.RU;
+    }else if(locale==="UA"){
+      return localization.finishOrder.UA;
+    }
+  }
+
+  getLocalizedDriverArrives(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.driverArrives.EN;
+    }else if(locale==="RU"){
+      return localization.driverArrives.RU;
+    }else if(locale==="UA"){
+      return localization.driverArrives.UA;
+    }
+  }
+
+  getLocalizedMinutes(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.minutes.EN;
+    }else if(locale==="RU"){
+      return localization.minutes.RU;
+    }else if(locale==="UA"){
+      return localization.minutes.UA;
+    }
+  }
+
+
+
 }

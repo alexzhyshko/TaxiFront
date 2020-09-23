@@ -29,6 +29,10 @@ export class StorageService {
     return this.localStorage.retrieve("locale");
   }
 
+  getPage(){
+      return this.localStorage.retrieve("page");
+  }
+
   isLoggedIn(): boolean {
     return this.getToken() != null;
   }
@@ -51,6 +55,10 @@ export class StorageService {
 
   setLocale(locale: string){
     this.localStorage.store("locale", locale);
+  }
+
+  setPage(page: number){
+    this.localStorage.store("page", page);
   }
 
   clear(){

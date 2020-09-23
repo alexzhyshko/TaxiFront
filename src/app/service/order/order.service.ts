@@ -5,6 +5,7 @@ import { UserDTO } from "../../dto/UserDTO";
 import { Observable } from 'rxjs';
 import { OrderDTO } from "../../dto/OrderDTO";
 import { RouteDetails } from "../../dto/response/RouteDetails";
+import { UserOrdersResponse } from "../../dto/response/UserOrdersResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,14 @@ export class OrderService {
 
   getActiveOrdersByUserId(): Observable<Array<OrderDTO>>{
     var userid = this.storage.getUserId();
-    return this.httpClient.get<Array<OrderDTO>>(this.baseUrl+"/order/get/active/byUserId/"+userid);
+    var page = this.storage.getPage();
+    return this.httpClient.get<Array<OrderDTO>>(this.baseUrl+"/order/get/byUserId?type=active&userId="+userid+"&page="+page);
   }
 
-  getAllOrdersByUserId(): Observable<Array<OrderDTO>>{
+  getAllOrdersByUserId(): Observable<UserOrdersResponse>{
     var userid = this.storage.getUserId();
-    return this.httpClient.get<Array<OrderDTO>>(this.baseUrl+"/order/get/all/byUserId/"+userid);
+    var page = this.storage.getPage();
+    return this.httpClient.get<UserOrdersResponse>(this.baseUrl+"/order/get/byUserId?type=all&userId="+userid+"&page="+page);
   }
 
   getOrderDetails(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, places:number): Observable<Array<RouteDetails>>{

@@ -40,8 +40,16 @@ export class UserService {
     this.storage.setLocale(locale);
   }
 
+  setPage(page: number){
+    this.storage.setPage(page);
+  }
+
   getLocale(){
     return this.storage.getLocale();
+  }
+
+  getActivePage(){
+    return this.storage.getPage();
   }
 
   order(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, category: string, places:number, anyCategory: boolean, anyCountOfCars: boolean): Observable<OrderDTO> {
