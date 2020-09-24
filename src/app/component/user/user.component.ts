@@ -19,6 +19,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
+
+  loading = false;
   cars = [];
   variants = [];
   imgname: string;
@@ -142,16 +144,15 @@ export class UserComponent implements OnInit {
 
   loadDetails() {
     if (this.orderPassengerCount !== undefined && this.markers.length == 2) {
+      this.loading = true;
       var departureLng = this.markers[0]._lngLat.lng;
       var departureLat = this.markers[0]._lngLat.lat;
       var destinationLng = this.markers[1]._lngLat.lng;
       var destinationLat = this.markers[1]._lngLat.lat;
       var places = this.orderPassengerCount;
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data) => {
-        console.log(data);
         this.variants = data;
-
-
+        this.loading = false;
       });
     }
   }
@@ -171,7 +172,9 @@ export class UserComponent implements OnInit {
     var destinationLat = this.markers[1]._lngLat.lat;
     var places = this.orderPassengerCount;
     this.userService.order(departureLng, departureLat, destinationLng, destinationLat, category, places, false, false).subscribe((data) => {
+      this.toastr.success(this.localizationService.getLocalizedDriverArrives()+" "+data.timeToArrival+" "+this.localizationService.getLocalizedMinutes()+"\n"+data.driver.name+", "+data.car.manufacturer+" "+data.car.model+", "+data.car.plate+"\n"+data.price+"₴");
       this.router.navigateByUrl("orders");
+      this.userService.setPage(0);
     }, (err) => {
       this.toastr.error(err.error.text);
     });

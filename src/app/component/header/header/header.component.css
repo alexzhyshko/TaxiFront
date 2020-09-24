@@ -64,6 +64,10 @@
   color: white;
 }
 
+.navbar-brand span{
+  cursor: pointer;
+}
+
 .my-orders{
   color: white;
 }

@@ -17,6 +17,7 @@ import { AdminComponent } from './component/admin/admin.component';
 import { OrderComponent } from './component/order/order.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptor } from './token.interceptor';
+import { LandingComponent } from './component/landing/landing.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TokenInterceptor } from './token.interceptor';
     HeaderComponent,
     UserComponent,
     AdminComponent,
-    OrderComponent
+    OrderComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

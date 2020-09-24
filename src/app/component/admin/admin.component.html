@@ -1,1 +1,21 @@
-<p>admin works!</p>
+<div class="loader" *ngIf="loading"></div>
+<div class="display" routerLink="/" *ngIf="orders.length==0 && !loading">
+  <span class="display-3">Let's make your first order</span>
+</div>
+<div class="pages">
+  <span [class.bg-grey]="number!=getActiveAdminPage()" [class.bg-green]="number==getActiveAdminPage()" class="page" *ngFor="let number of pages" (click)="setAdminPage(number)">{{number+1}}</span>
+</div>
+
+<div class="card" *ngFor="let order of orders">
+  <div class="card-body">
+    <p class="card-text">{{order.driver.name}} &bull; {{order.car.plate}} &bull; {{order.car.manufacturer}} {{order.car.model}}</p>
+    <p class="card-text" *ngIf="order.statusid==1">{{getLocalizedDriverArrives()}} {{order.timeToArrival}} {{getLocalizedMinutes()}}</p>
+    <p class="card-text">{{order.price}}₴ &bull; {{order.car.category}}</p>
+    <button class="btn btn-sm btn-info" type="button" name="button" *ngIf="order.statusid==1" (click)="finishOrder(order.id)">{{getLocalizedFinishOrder()}}</button>
+  </div>
+  <div class="card-footer">
+    <small class="footer-text">{{order.dateOfOrder.date.day}}-{{order.dateOfOrder.date.month}}-{{order.dateOfOrder.date.year}} {{order.dateOfOrder.time.hour}}:{{order.dateOfOrder.time.minute}}</small>
+    <br>
+    <small class="footer-text">{{order.status}}</small>
+  </div>
+</div>

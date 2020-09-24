@@ -1,0 +1,46 @@
+.content{
+  margin-top: 20px;
+  width: 85vw;
+  height: 90vh;
+  margin-left: 7.5vw;
+  border-radius: 25px;
+  border: 2px solid #2eb875;;
+}
+
+.content-head{
+  background: #2eb875;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  text-align: center;
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid white;
+}
+
+.content-head span{
+  cursor: pointer;
+}
+
+.content-main{
+  height: calc(90vh - 50px - 80px);
+  background-image: url(./../../../assets/landing_bg.jpg);
+  background-size: cover;
+}
+
+.content-footer{
+  background: #2eb875;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top: 1px solid white;
+  width: 85vw;
+  height: 50px;
+  text-align: center;
+  padding: 15px;
+  color: white;
+}
+
+.content-footer a{
+  color: white;
+  text-decoration: none;
+}

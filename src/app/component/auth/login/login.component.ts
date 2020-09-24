@@ -52,10 +52,13 @@ export class LoginComponent implements OnInit {
       if (data) {
         this.isError = false;
         this.toastr.success('Login Successful');
-        window.location.replace("/");
+        this.router.navigateByUrl("/main");
+        //window.location.replace("/main");
       } else {
         this.isError = true;
       }
+    },err=>{
+      this.toastr.error(err.error);
     });
   }
 

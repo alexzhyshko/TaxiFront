@@ -1,17 +1,15 @@
 <nav class="navbar navbar-dark bg-green justify-content-between">
-  <a class="navbar-brand" routerLink="/">
-    <span class="h3">Taxi</span>
-    <img width="60px" src="assets/logo.png" alt="">
-    <span class="my-orders ml-4" routerLink="orders" *ngIf="isLoggedIn">{{getLocalizedMyOrders()}}</span>
+  <a class="navbar-brand" >
+    <span routerLink="/main">
+      <span class="h3">Taxi</span>
+      <img width="60px" src="assets/logo.png" alt="">
+    </span>
+    <span class="my-orders ml-4" routerLink="/orders" *ngIf="isLoggedIn">{{getLocalizedMyOrders()}}</span>
+    <span class="my-orders ml-4" routerLink="/admin" *ngIf="user.role==='ADMIN'">{{getLocalizedAdminDashboard()}}</span>
   </a>
 
   <div class="float-right" id="navbarText">
-    <div *ngIf="!isLoggedIn" class="btn-group float-right" role="group">
-      <button type="button" class="btn btn-light btn-sm" routerLink="/login">Login</button>
-      <button type="button" class="btn btn-secondary btn-sm" routerLink="/signup">Sign up</button>
-    </div>
-
-    <div *ngIf="isLoggedIn">
+    <div>
       <div class="dropleft no-dropdown-sign">
         <button class="btn dropdown-toggle no-dropdown-sign" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img width="30px;" class="mr-2" src="https://www.countryflags.io/{{getLocale()}}/flat/64.png">
@@ -21,10 +19,12 @@
           <a class="dropdown-item"><img width="30px;" class="mr-2" src="https://www.countryflags.io/ru/flat/64.png" (click)="setLocale('RU')"></a>
           <a class="dropdown-item"><img width="30px;" class="mr-2" src="https://www.countryflags.io/gb/flat/64.png" (click)="setLocale('EN')"></a>
         </div>
-        <a class="btn btn-sm bg-light text-center" (click)="logout()">Logout</a>
+        <div *ngIf="!isLoggedIn" class="btn-group float-right" role="group">
+          <button type="button" class="btn btn-light btn-sm" routerLink="/login">Login</button>
+          <button type="button" class="btn btn-secondary btn-sm" routerLink="/register">Sign up</button>
+        </div>
+        <a class="btn btn-sm bg-light text-center" (click)="logout()" *ngIf="isLoggedIn">Logout</a>
       </div>
-
-
     </div>
   </div>
 </nav>

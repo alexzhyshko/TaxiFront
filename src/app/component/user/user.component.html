@@ -1,3 +1,4 @@
+<div class="loader" *ngIf="loading"></div>
 <div id="container">
   <div id="inner">
     <div id="map" class="child map-container"> </div>
@@ -16,6 +17,7 @@
       <div class="img">
         <img src="{{imgname}}" alt=""/>
       </div>
+
       <div class="options">
         <div class="option" (click)="orderRegular(variant.categoryLocaleName.toUpperCase())" *ngFor="let variant of variants">
           <div class="option-category">{{variant.categoryLocaleName}}</div>

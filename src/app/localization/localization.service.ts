@@ -131,6 +131,37 @@ export class LocalizationService {
     }
   }
 
+  getLocalizedSlogan(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.slogan.EN;
+    }else if(locale==="RU"){
+      return localization.slogan.RU;
+    }else if(locale==="UA"){
+      return localization.slogan.UA;
+    }
+  }
 
+  getLocalizedContactMe(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.contact.EN;
+    }else if(locale==="RU"){
+      return localization.contact.RU;
+    }else if(locale==="UA"){
+      return localization.contact.UA;
+    }
+  }
+
+  getLocalizedAdminDashboard(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.adminDashboard.EN;
+    }else if(locale==="RU"){
+      return localization.adminDashboard.RU;
+    }else if(locale==="UA"){
+      return localization.adminDashboard.UA;
+    }
+  }
 
 }

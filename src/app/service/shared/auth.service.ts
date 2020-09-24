@@ -19,7 +19,7 @@ export class AuthService {
     private localStorage: StorageService) { }
 
 
-  signup(registerRequest: RegisterRequest): Observable<any> {
+  register(registerRequest: RegisterRequest): Observable<any> {
     return this.httpClient.post('http://localhost:8080/Taxi/register', registerRequest, { responseType: 'text' });
   }
 

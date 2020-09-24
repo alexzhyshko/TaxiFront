@@ -53,5 +53,20 @@
   "RU": "минут",
   "UA": "хвилин",
   "EN": "minutes"
+},
+"slogan":{
+  "RU": "Удобный интерфейс и быстрые заказы",
+  "UA": "Зручний інтерфейс та швидкі замовлення",
+  "EN": "Convenient interface and fast orders"
+},
+"contact":{
+  "RU": "Связь",
+  "UA": "Зв'язок",
+  "EN": "Contact me"
+},
+"adminDashboard":{
+  "RU": "Админ-панель",
+  "UA": "Адмін-панель",
+  "EN": "Admin dashboard"
 }
 }

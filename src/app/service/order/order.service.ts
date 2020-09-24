@@ -30,6 +30,11 @@ export class OrderService {
     return this.httpClient.get<UserOrdersResponse>(this.baseUrl+"/order/get/byUserId?type=all&userId="+userid+"&page="+page);
   }
 
+  getAllOrders(): Observable<UserOrdersResponse>{
+    var page = this.storage.getPage();
+    return this.httpClient.get<UserOrdersResponse>(this.baseUrl+"/order/get/byUserId?type=all&userId="+userid+"&page="+page);
+  }
+
   getOrderDetails(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, places:number): Observable<Array<RouteDetails>>{
     var payload = {
       departureLongitude: departureLng,
