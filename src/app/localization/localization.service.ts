@@ -164,4 +164,103 @@ export class LocalizationService {
     }
   }
 
+  getLocalizedSortBy(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.sortBy.EN;
+    }else if(locale==="RU"){
+      return localization.sortBy.RU;
+    }else if(locale==="UA"){
+      return localization.sortBy.UA;
+    }
+  }
+
+  getLocalizedDateLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.date.EN;
+    }else if(locale==="RU"){
+      return localization.date.RU;
+    }else if(locale==="UA"){
+      return localization.date.UA;
+    }
+  }
+
+  getLocalizedPriceLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.price.EN;
+    }else if(locale==="RU"){
+      return localization.price.RU;
+    }else if(locale==="UA"){
+      return localization.price.UA;
+    }
+  }
+
+  getLocalizedOrderLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.order.EN;
+    }else if(locale==="RU"){
+      return localization.order.RU;
+    }else if(locale==="UA"){
+      return localization.order.UA;
+    }
+  }
+
+  getLocalizedAscLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.asc.EN;
+    }else if(locale==="RU"){
+      return localization.asc.RU;
+    }else if(locale==="UA"){
+      return localization.asc.UA;
+    }
+  }
+
+  getLocalizedDescLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.desc.EN;
+    }else if(locale==="RU"){
+      return localization.desc.RU;
+    }else if(locale==="UA"){
+      return localization.desc.UA;
+    }
+  }
+
+  getLocalizedFilterLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.filter.EN;
+    }else if(locale==="RU"){
+      return localization.filter.RU;
+    }else if(locale==="UA"){
+      return localization.filter.UA;
+    }
+  }
+
+  getLocalizedUserLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.user.EN;
+    }else if(locale==="RU"){
+      return localization.user.RU;
+    }else if(locale==="UA"){
+      return localization.user.UA;
+    }
+  }
+
+  getLocalizedApplyLabel(){
+    var locale = this.localStorage.getLocale();
+    if(locale==="EN"){
+      return localization.apply.EN;
+    }else if(locale==="RU"){
+      return localization.apply.RU;
+    }else if(locale==="UA"){
+      return localization.apply.UA;
+    }
+  }
+
 }

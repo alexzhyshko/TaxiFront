@@ -1,12 +1,50 @@
 <div class="loader" *ngIf="loading"></div>
-<div class="display" routerLink="/" *ngIf="orders.length==0 && !loading">
-  <span class="display-3">Let's make your first order</span>
-</div>
+<div class="row controls">
+    <div class="col cell">
+      {{getLocalizedSortBy()}}
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="sortByOptions" id="inlineRadio1" value="option1" (click)="setSortBy('date')">
+        <label class="form-check-label" for="inlineRadio1">{{getLocalizedDateLabel()}}</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="sortByOptions" id="inlineRadio2" value="option2" (click)="setSortBy('price')">
+        <label class="form-check-label" for="inlineRadio2">{{getLocalizedPriceLabel()}}</label>
+      </div>
+    </div>
+    <div class="col cell">
+      {{getLocalizedOrderLabel()}}
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="orderOptions" id="inlineRadio1" value="option1" (click)="setOrder('asc')">
+        <label class="form-check-label" for="inlineRadio1">{{getLocalizedAscLabel()}}</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="orderOptions" id="inlineRadio2" value="option2" (click)="setOrder('desc')">
+        <label class="form-check-label" for="inlineRadio2">{{getLocalizedDescLabel()}}</label>
+      </div>
+    </div>
+    <div class="col cell">
+      {{getLocalizedFilterLabel()}}
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="filterByOptions" id="inlineRadio1" value="option1" (click)="setFilterBy('user')">
+        <label class="form-check-label" for="inlineRadio1">{{getLocalizedUserLabel()}}</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="filterByOptions" id="inlineRadio2" value="option2" (click)="setFilterBy('date')">
+        <label class="form-check-label" for="inlineRadio2">{{getLocalizedDateLabel()}}</label>
+      </div>
+    </div>
+    <div class="col control">
+      <input type="text" class="form-control" (keyup)="onKey($event)">
+    </div>
+    <div class="col control">
+      <button class="btn btn-sm btn-success" type="button" name="button" (click)="applyControls()">{{getLocalizedApplyLabel()}}</button>
+    </div>
+  </div>
 <div class="pages">
   <span [class.bg-grey]="number!=getActiveAdminPage()" [class.bg-green]="number==getActiveAdminPage()" class="page" *ngFor="let number of pages" (click)="setAdminPage(number)">{{number+1}}</span>
 </div>
 
-<div class="card" *ngFor="let order of orders">
+<div [class.bg-grey]="order.statusid==2" [class.bg-green]="order.statusid==1" class="card" *ngFor="let order of orders">
   <div class="card-body">
     <p class="card-text">{{order.driver.name}} &bull; {{order.car.plate}} &bull; {{order.car.manufacturer}} {{order.car.model}}</p>
     <p class="card-text" *ngIf="order.statusid==1">{{getLocalizedDriverArrives()}} {{order.timeToArrival}} {{getLocalizedMinutes()}}</p>

@@ -44,12 +44,20 @@ export class UserService {
     this.storage.setPage(page);
   }
 
+  setAdminPage(page: number){
+    this.storage.setAdminPage(page);
+  }
+
   getLocale(){
     return this.storage.getLocale();
   }
 
   getActivePage(){
     return this.storage.getPage();
+  }
+
+  getActiveAdminPage(){
+    return this.storage.getAdminPage();
   }
 
   order(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, category: string, places:number, anyCategory: boolean, anyCountOfCars: boolean): Observable<OrderDTO> {

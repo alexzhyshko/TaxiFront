@@ -153,6 +153,9 @@ export class UserComponent implements OnInit {
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data) => {
         this.variants = data;
         this.loading = false;
+        if(this.variants.length==0){
+          this.toastr.error("No cars found. Try ordering a couple of cars with lower passenger count");
+        }
       });
     }
   }

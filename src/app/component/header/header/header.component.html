@@ -5,7 +5,7 @@
       <img width="60px" src="assets/logo.png" alt="">
     </span>
     <span class="my-orders ml-4" routerLink="/orders" *ngIf="isLoggedIn">{{getLocalizedMyOrders()}}</span>
-    <span class="my-orders ml-4" routerLink="/admin" *ngIf="user.role==='ADMIN'">{{getLocalizedAdminDashboard()}}</span>
+    <span class="my-orders ml-4" routerLink="/admin" *ngIf="isLoggedIn && user.role==='ADMIN'">{{getLocalizedAdminDashboard()}}</span>
   </a>
 
   <div class="float-right" id="navbarText">

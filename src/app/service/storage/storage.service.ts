@@ -33,6 +33,10 @@ export class StorageService {
       return this.localStorage.retrieve("page");
   }
 
+  getAdminPage(){
+      return this.localStorage.retrieve("adminPage");
+  }
+
   isLoggedIn(): boolean {
     return this.getToken() != null;
   }
@@ -59,6 +63,10 @@ export class StorageService {
 
   setPage(page: number){
     this.localStorage.store("page", page);
+  }
+
+  setAdminPage(page: number){
+    this.localStorage.store("adminPage", page);
   }
 
   clear(){

@@ -11,7 +11,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { RefreshTokenResponse } from "./dto/response/RefreshTokenResponse";
 import { AuthService } from './service/shared/auth.service';
 import { StorageService } from './service/storage/storage.service';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, take, filter } from 'rxjs/operators';
 
 
 @Injectable({
@@ -49,10 +49,17 @@ export class TokenInterceptor implements HttpInterceptor {
           return next.handle(this.addToken(req, refreshTokenResponse.token, this.storageService.getLocale()));
         })
       )
+    } else {
+      return this.refreshTokenSubject.pipe(
+        filter(token => token != null),
+        take(1),
+        switchMap(jwt => {
+          return next.handle(this.addToken(req, jwt, this.storageService.getLocale()));
+        }));
     }
   }
   private addToken(req: HttpRequest<any>, jwtToken: string, locale: string): HttpRequest<any> {
-    let headers = new HttpHeaders({'User_Locale': locale, 'Authorization': `Bearer ${jwtToken}`, 'Content-Type': 'text/json; charset=UTF-8'});
+    let headers = new HttpHeaders({ 'User_Locale': locale, 'Authorization': `Bearer ${jwtToken}`, 'Content-Type': 'text/json; charset=UTF-8' });
     var clonedRequest = req.clone();
     clonedRequest.headers = headers;
     return clonedRequest;
