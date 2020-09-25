@@ -32,7 +32,7 @@ export class OrderService {
 
   getAllOrders(sort, filter, sortBy, sortOrder, filterBy, value): Observable<UserOrdersResponse>{
     var page = this.storage.getAdminPage();
-    return this.httpClient.get<UserOrdersResponse>(this.baseUrl+"/order/get/all?sort="+sort+"&filter="+filter+"&sortBy="+sortBy+"&sortOrder="+sortOrder+"&filterBy="+filterBy+"&value="+value+"&page="+page);
+    return this.httpClient.get<UserOrdersResponse>(this.baseUrl+"/admin/order/get/all?sort="+sort+"&filter="+filter+"&sortBy="+sortBy+"&sortOrder="+sortOrder+"&filterBy="+filterBy+"&value="+value+"&page="+page);
   }
 
   getOrderDetails(departureLng: string, departureLat: string, destinationLng: string, destinationLat: string, places:number): Observable<Array<RouteDetails>>{

@@ -83,6 +83,9 @@ export class AdminComponent implements OnInit {
       this.orders = data.orders;
       this.pages = Array(data.numberOfPages).fill(1).map((x,i)=>i);
       this.loading = false;
+      if(this.orders.length===0){
+        this.toastr.error("Nothing found by tour criteria");
+      }
     });
   }
 
