@@ -101,10 +101,14 @@ export class UserComponent implements OnInit {
         };
         this.addCarMarker(lngLat);
       }
+    },err=>{
+      this.toastr.error(err.error);
     });
     this.userService.getCurrentUserByUsername().subscribe(data => {
       this.user = data;
       this.userService.setUserId(this.user.id);
+    },err=>{
+      this.toastr.error(err.error);
     });
   }
 
@@ -153,9 +157,10 @@ export class UserComponent implements OnInit {
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data) => {
         this.variants = data;
         this.loading = false;
-        if(this.variants.length==0){
-          this.toastr.error("No cars found. Try ordering a couple of cars with lower passenger count");
-        }
+      }, err=>{
+        this.loading = false;
+        this.variants = [];
+        this.toastr.error(err.error);
       });
     }
   }
@@ -179,7 +184,7 @@ export class UserComponent implements OnInit {
       this.router.navigateByUrl("orders");
       this.userService.setPage(0);
     }, (err) => {
-      this.toastr.error(err.error.text);
+      this.toastr.error(err.error);
     });
   }
 

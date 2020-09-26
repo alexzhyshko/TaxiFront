@@ -37,6 +37,9 @@ export class AdminComponent implements OnInit {
       this.orders = data.orders;
       this.pages = Array(data.numberOfPages).fill(1).map((x,i)=>i);
       this.loading = false;
+    },err=>{
+      this.loading = false;
+      this.toastr.error(err.error);
     });
   }
 
@@ -83,9 +86,11 @@ export class AdminComponent implements OnInit {
       this.orders = data.orders;
       this.pages = Array(data.numberOfPages).fill(1).map((x,i)=>i);
       this.loading = false;
-      if(this.orders.length===0){
-        this.toastr.error("Nothing found by tour criteria");
-      }
+    },err=>{
+      this.loading = false;
+      this.orders = [];
+      this.pages = [];
+      this.toastr.error(err.error);
     });
   }
 
@@ -103,6 +108,8 @@ export class AdminComponent implements OnInit {
   finishOrder(orderid: number){
     this.orderService.finishOrder(orderid).subscribe(data=>{}, err=>{
       this.ngOnInit();
+    },err=>{
+      this.toastr.error(err.error);
     });
   }
 

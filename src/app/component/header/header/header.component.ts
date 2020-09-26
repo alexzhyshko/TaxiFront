@@ -20,6 +20,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router,
     private userService: UserService, private localizationService: LocalizationService) {
+      this.userService.getCurrentUserByUsername().subscribe(data=>{
+        this.user = data;
+      },err=>{
+        this.toastr.error(err.error);
+      });
       this.router.routeReuseStrategy.shouldReuseRoute = function() {
         return false;
       };
@@ -27,6 +32,8 @@ export class HeaderComponent implements OnInit {
         if (event instanceof NavigationEnd) {
           this.ngOnInit();
         }
+      },err=>{
+        this.toastr.error(err.error);
       });
   }
 
@@ -52,6 +59,8 @@ export class HeaderComponent implements OnInit {
     if (this.isLoggedIn) {
       this.userService.getCurrentUserByUsername().subscribe(data => {
         this.user = data;
+      },err=>{
+        this.toastr.error(err.error);
       });
     }
   }

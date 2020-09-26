@@ -31,12 +31,19 @@ export class OrderComponent implements OnInit {
       this.orders = data.orders;
       this.pages = Array(data.numberOfPages).fill(1).map((x,i)=>i);
       this.loading = false;
+    },err=>{
+      this.toastr.error(err.error);
     });
   }
 
   finishOrder(orderid: number){
     this.orderService.finishOrder(orderid).subscribe(data=>{}, err=>{
-      this.ngOnInit();
+      if(err.status===200){
+        this.toastr.success(err.error.text);
+        this.ngOnInit();
+      }else if(err.status===500){
+        this.toastr.error(err.error);
+      }
     });
   }
 

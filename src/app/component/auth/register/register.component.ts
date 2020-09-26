@@ -40,14 +40,13 @@ export class RegisterComponent implements OnInit {
     this.signupRequestPayload.password = this.signupForm.get('password').value;
     this.signupRequestPayload.name = this.signupForm.get('name').value;
     this.signupRequestPayload.surname = this.signupForm.get('surname').value;
-    console.log(this.signupRequestPayload);
-
     this.authService.register(this.signupRequestPayload).subscribe(
-      () => {
+      (data) => {
+        this.toastr.success(data);
         this.router.navigate(['/login'], { queryParams: { registered: true } })
       },
-      (data) => {
-        this.toastr.error(data);
+      (err) => {
+        this.toastr.error(err.error);
       }
     );
   }

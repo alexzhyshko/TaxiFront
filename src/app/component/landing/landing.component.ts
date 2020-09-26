@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalizationService } from "../../localization/localization.service";
-
+import { UserService } from "../../service/user/user.service";
 
 @Component({
   selector: 'app-landing',
@@ -9,16 +9,22 @@ import { LocalizationService } from "../../localization/localization.service";
 })
 export class LandingComponent implements OnInit {
 
-  constructor(private localizationService: LocalizationService) { }
-
-  ngOnInit(): void {
+  userService: UserService;
+  constructor(userService: UserService, private localizationService: LocalizationService) {
+    this.userService = userService;
   }
 
-  getLocalizedSlogan(){
+  ngOnInit(): void {
+    if (this.userService.getLocale() == null) {
+      this.userService.setLocale('EN');
+    }
+  }
+
+  getLocalizedSlogan() {
     return this.localizationService.getLocalizedSlogan();
   }
 
-  getLocalizedContactMe(){
+  getLocalizedContactMe() {
     return this.localizationService.getLocalizedContactMe();
   }
 
