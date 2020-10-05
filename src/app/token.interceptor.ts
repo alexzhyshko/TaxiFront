@@ -59,7 +59,7 @@ export class TokenInterceptor implements HttpInterceptor {
     }
   }
   private addToken(req: HttpRequest<any>, jwtToken: string, locale: string): HttpRequest<any> {
-    let headers = new HttpHeaders({ 'User_Locale': locale, 'Authorization': `Bearer ${jwtToken}`, 'Content-Type': 'text/json; charset=UTF-8' });
+    let headers = new HttpHeaders({ 'User_Locale': locale, 'Authorization': `Bearer ${jwtToken}`, 'Content-Type': 'application/json; charset=UTF-8' });
     var clonedRequest = req.clone();
     clonedRequest.headers = headers;
     return clonedRequest;

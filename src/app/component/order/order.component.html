@@ -14,7 +14,7 @@
     <button class="btn btn-sm btn-info" type="button" name="button" *ngIf="order.statusid==1" (click)="finishOrder(order.id)">{{getLocalizedFinishOrder()}}</button>
   </div>
   <div class="card-footer">
-    <small class="footer-text">{{order.dateOfOrder.date.day}}-{{order.dateOfOrder.date.month}}-{{order.dateOfOrder.date.year}} {{order.dateOfOrder.time.hour}}:{{order.dateOfOrder.time.minute}}</small>
+    <!--<small class="footer-text">{{order.dateOfOrder.date.day}}-{{order.dateOfOrder.date.month}}-{{order.dateOfOrder.date.year}} {{order.dateOfOrder.time.hour}}:{{order.dateOfOrder.time.minute}}</small>-->
     <br>
     <small class="footer-text">{{order.status}}</small>
   </div>

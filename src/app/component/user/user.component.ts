@@ -156,6 +156,8 @@ export class UserComponent implements OnInit {
       var places = this.orderPassengerCount;
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data) => {
         this.variants = data;
+        console.log(data);
+
         this.loading = false;
       }, err=>{
         this.loading = false;

@@ -28,17 +28,25 @@ export class OrderComponent implements OnInit {
       this.userService.setPage(0);
     }
     this.orderService.getAllOrdersByUserId().subscribe(data=>{
+
+
+
       this.orders = data.orders;
+      console.log(this.orders[0].dateOfOrder);
       this.pages = Array(data.numberOfPages).fill(1).map((x,i)=>i);
       this.loading = false;
     },err=>{
+        console.log(err);
       this.toastr.error(err.error);
     });
   }
 
   finishOrder(orderid: number){
-    this.orderService.finishOrder(orderid).subscribe(data=>{}, err=>{
-      if(err.status===200){
+    this.orderService.finishOrder(orderid).subscribe(data=>{
+      this.toastr.success(data);
+      this.ngOnInit();
+    }, err=>{
+      if(err.status>=200&&err.status<300){
         this.toastr.success(err.error.text);
         this.ngOnInit();
       }else if(err.status===500){

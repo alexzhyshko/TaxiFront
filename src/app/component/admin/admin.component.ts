@@ -108,7 +108,6 @@ export class AdminComponent implements OnInit {
   finishOrder(orderid: number){
     this.orderService.finishOrder(orderid).subscribe(data=>{}, err=>{
       this.ngOnInit();
-    },err=>{
       this.toastr.error(err.error);
     });
   }
@@ -147,6 +146,18 @@ export class AdminComponent implements OnInit {
 
   getLocalizedApplyLabel(){
         return this.localizationService.getLocalizedApplyLabel();
+  }
+
+  getLocalizedFinishOrder(){
+    return this.localizationService.getLocalizedFinishOrder();
+  }
+
+  getLocalizedDriverArrives(){
+    return this.localizationService.getLocalizedDriverArrives();
+  }
+
+  getLocalizedMinutes(){
+    return this.localizationService.getLocalizedMinutes();
   }
 
 }

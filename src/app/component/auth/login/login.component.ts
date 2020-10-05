@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.activatedRoute.queryParams
       .subscribe(params => {
         if (params.registered !== undefined && params.registered === 'true') {
-          
+
         }
       },err=>{
         this.toastr.error(err.error);
@@ -55,6 +55,8 @@ export class LoginComponent implements OnInit {
         this.isError = true;
       }
     },err=>{
+      console.log(err);
+
       this.toastr.error(err.error);
     });
   }

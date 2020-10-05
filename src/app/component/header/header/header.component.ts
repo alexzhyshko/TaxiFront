@@ -5,6 +5,8 @@ import { UserService } from "../../../service/user/user.service";
 import { UserDTO } from "../../../dto/UserDTO";
 import { LocalizationService } from "../../../localization/localization.service";
 import { NavigationEnd } from '@angular/router';
+import { ToastrService } from "ngx-toastr";
+
 
 @Component({
   selector: 'app-header',
@@ -19,22 +21,26 @@ export class HeaderComponent implements OnInit {
   mySubscription: any;
 
   constructor(private authService: AuthService, private router: Router,
-    private userService: UserService, private localizationService: LocalizationService) {
-      this.userService.getCurrentUserByUsername().subscribe(data=>{
+    private userService: UserService, private localizationService: LocalizationService,
+    private toastr: ToastrService) {
+    if (this.authService.isLoggedIn()) {
+      this.userService.getCurrentUserByUsername().subscribe(data => {
         this.user = data;
-      },err=>{
+      }, err => {
         this.toastr.error(err.error);
       });
-      this.router.routeReuseStrategy.shouldReuseRoute = function() {
-        return false;
-      };
-      this.mySubscription = this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          this.ngOnInit();
-        }
-      },err=>{
-        this.toastr.error(err.error);
-      });
+    }
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    }, err => {
+      this.toastr.error(err.error);
+    });
   }
 
   getLocale() {
@@ -59,15 +65,12 @@ export class HeaderComponent implements OnInit {
     if (this.isLoggedIn) {
       this.userService.getCurrentUserByUsername().subscribe(data => {
         this.user = data;
-      },err=>{
+      }, err => {
         this.toastr.error(err.error);
       });
     }
   }
 
-  goToUserProfile(userid: string) {
-    this.router.navigateByUrl("/profile/" + userid);
-  }
 
   logout() {
     this.authService.logout();
@@ -78,7 +81,7 @@ export class HeaderComponent implements OnInit {
     return this.localizationService.getLocalizedMyOrders();
   }
 
-  getLocalizedAdminDashboard(){
+  getLocalizedAdminDashboard() {
     return this.localizationService.getLocalizedAdminDashboard();
   }
 

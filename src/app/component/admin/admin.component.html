@@ -3,7 +3,7 @@
     <div class="col cell">
       {{getLocalizedSortBy()}}
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="sortByOptions" id="inlineRadio1" value="option1" (click)="setSortBy('date')">
+        <input class="form-check-input" type="radio" name="sortByOptions" id="inlineRadio1" value="option1" (click)="setSortBy('dateOfOrder')">
         <label class="form-check-label" for="inlineRadio1">{{getLocalizedDateLabel()}}</label>
       </div>
       <div class="form-check">
@@ -52,7 +52,7 @@
     <button class="btn btn-sm btn-info" type="button" name="button" *ngIf="order.statusid==1" (click)="finishOrder(order.id)">{{getLocalizedFinishOrder()}}</button>
   </div>
   <div class="card-footer">
-    <small class="footer-text">{{order.dateOfOrder.date.day}}-{{order.dateOfOrder.date.month}}-{{order.dateOfOrder.date.year}} {{order.dateOfOrder.time.hour}}:{{order.dateOfOrder.time.minute}}</small>
+    <!--<small class="footer-text">{{order.dateOfOrder.date.day}}-{{order.dateOfOrder.date.month}}-{{order.dateOfOrder.date.year}} {{order.dateOfOrder.time.hour}}:{{order.dateOfOrder.time.minute}}</small>-->
     <br>
     <small class="footer-text">{{order.status}}</small>
   </div>
