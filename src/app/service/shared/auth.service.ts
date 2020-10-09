@@ -15,8 +15,16 @@ import { RefreshTokenResponse } from '../../dto/response/RefreshTokenResponse';
 
 export class AuthService {
 
+  logoutRequest: LogoutRequest;
+
   constructor(private httpClient: HttpClient,
-    private localStorage: StorageService) { }
+    private localStorage: StorageService) {
+      this.logoutRequest = {
+        token: '',
+        refreshToken: '',
+        username: ''
+      };
+     }
 
 
   register(registerRequest: RegisterRequest): Observable<any> {
@@ -26,8 +34,6 @@ export class AuthService {
   login(loginRequest: LoginRequest): Observable<boolean> {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/Taxi/login',
       loginRequest).pipe(map(data => {
-        console.log(data);
-
         this.localStorage.setUsername(data.username);
         this.localStorage.setToken(data.token);
         this.localStorage.setRefreshToken(data.refreshToken);
@@ -43,15 +49,15 @@ export class AuthService {
       }));
   }
 
-  logout() {
+  logout() : Observable<any> {
     var refreshToken = this.localStorage.getRefreshToken();
     var token = this.localStorage.getToken();
+    var username = this.localStorage.getUsername();
     this.localStorage.clear();
-    const logoutPayload = {
-      refreshToken: refreshToken,
-      token: token
-    }
-    this.httpClient.post("http://localhost:8080/Taxi/logout", logoutPayload);
+    this.logoutRequest.refreshToken = refreshToken;
+    this.logoutRequest.token = token;
+    this.logoutRequest.username = username;
+    return this.httpClient.post('http://localhost:8080/Taxi/signoff', this.logoutRequest, { responseType: 'text' });
   }
 
   isLoggedIn(){

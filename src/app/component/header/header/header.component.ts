@@ -73,8 +73,13 @@ export class HeaderComponent implements OnInit {
 
 
   logout() {
-    this.authService.logout();
-    window.location.replace("/");
+    this.authService.logout().subscribe(data => {
+      this.toastr.success(data);
+      this.router.navigateByUrl("");
+    }, err => {
+      this.toastr.error(err);
+    });
+
   }
 
   getLocalizedMyOrders() {

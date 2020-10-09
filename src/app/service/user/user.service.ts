@@ -5,7 +5,7 @@ import { UserDTO } from "../../dto/UserDTO";
 import { OrderDTO } from "../../dto/OrderDTO";
 import { CarDTO } from "../../dto/CarDTO";
 import { Observable } from 'rxjs';
-
+import 'rxjs/add/operator/toPromise';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,11 @@ export class UserService {
 
   getCurrentUserByUsername(): Observable<UserDTO> {
     return this.httpClient.get<UserDTO>(this.baseUrl + '/user/getByUsername?username=' + this.storage.getUsername());
+  }
+
+  async getCurrentUserPromiseByUsername() {
+    const response = await this.httpClient.get<UserDTO>(this.baseUrl + '/user/getByUsername?username=' + this.storage.getUsername()).toPromise();
+    return response;
   }
 
   setUserId(userid: string){
