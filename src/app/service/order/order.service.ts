@@ -13,7 +13,7 @@ import { UserOrdersResponse } from "../../dto/response/UserOrdersResponse";
 export class OrderService {
 
 
-  baseUrl = 'http://localhost:8080/Taxi';
+  baseUrl = 'http://35.211.20.205:8080/Taxi';
 
 
   constructor(private storage: StorageService, private httpClient: HttpClient) { }

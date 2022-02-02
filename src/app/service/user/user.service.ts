@@ -14,7 +14,7 @@ export class UserService {
 
 
 
-  baseUrl = 'http://localhost:8080/Taxi';
+  baseUrl = 'http://35.211.20.205:8080/Taxi';
 
   constructor(private storage: StorageService, private httpClient: HttpClient) {
 

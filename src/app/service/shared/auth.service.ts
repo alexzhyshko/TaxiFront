@@ -28,11 +28,11 @@ export class AuthService {
 
 
   register(registerRequest: RegisterRequest): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/Taxi/register', registerRequest, { responseType: 'text' });
+    return this.httpClient.post('http://35.211.20.205:8080/Taxi/register', registerRequest, { responseType: 'text' });
   }
 
   login(loginRequest: LoginRequest): Observable<boolean> {
-    return this.httpClient.post<LoginResponse>('http://localhost:8080/Taxi/login',
+    return this.httpClient.post<LoginResponse>('http://35.211.20.205:8080/Taxi/login',
       loginRequest).pipe(map(data => {
         this.localStorage.setUsername(data.username);
         this.localStorage.setToken(data.token);
@@ -42,7 +42,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.httpClient.get<RefreshTokenResponse>('http://localhost:8080/Taxi/refreshToken?refreshToken='+this.localStorage.getRefreshToken()+"&token="+this.localStorage.getToken()+"&username="+this.localStorage.getUsername())
+    return this.httpClient.get<RefreshTokenResponse>('http://35.211.20.205:8080/Taxi/refreshToken?refreshToken='+this.localStorage.getRefreshToken()+"&token="+this.localStorage.getToken()+"&username="+this.localStorage.getUsername())
       .pipe(tap(response => {
         this.localStorage.setToken(response.token);
         this.localStorage.setRefreshToken(response.refreshToken);
@@ -53,11 +53,13 @@ export class AuthService {
     var refreshToken = this.localStorage.getRefreshToken();
     var token = this.localStorage.getToken();
     var username = this.localStorage.getUsername();
+    var locale = this.localStorage.getLocale();
     this.localStorage.clear();
     this.logoutRequest.refreshToken = refreshToken;
     this.logoutRequest.token = token;
     this.logoutRequest.username = username;
-    return this.httpClient.post('http://localhost:8080/Taxi/signoff', this.logoutRequest, { responseType: 'text' });
+    this.localStorage.setLocale(locale);
+    return this.httpClient.post('http://35.211.20.205:8080/Taxi/signoff', this.logoutRequest, { responseType: 'text' });
   }
 
   isLoggedIn(){

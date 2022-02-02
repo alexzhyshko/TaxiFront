@@ -157,11 +157,12 @@ export class UserComponent implements OnInit {
       this.orderService.getOrderDetails(departureLng, departureLat, destinationLng, destinationLat, places).subscribe((data) => {
         this.variants = data;
         console.log(data);
-
         this.loading = false;
       }, err=>{
         this.loading = false;
         this.variants = [];
+        console.log(err);
+
         this.toastr.error(err.error);
       });
     }
